@@ -7,6 +7,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int size;
 
     // construct an empty randomized queue
+    @SuppressWarnings("unchecked")
     public RandomizedQueue() {
         size = 0;
         q = (Item[]) new Object[1];
@@ -39,7 +40,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public int size() { return size; }
 
     private void resize(int capacity) {
-        Item[] copy = (Item[]) new Object[capacity];
+        @SuppressWarnings("unchecked") Item[] copy = (Item[]) new Object[capacity];
         for (int i = 0; i < size; i++) {
             copy[i] = q[i];
         }
@@ -56,7 +57,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // remove and return a random item
     public Item dequeue() {
         if (isEmpty()) throw new java.util.NoSuchElementException("Queue is Empty");
-        int r = StdRandom.uniform(size);
+        int r = StdRandom.uniformInt(size);
         Item item = q[r];
         q[r] = q[size-1];
         q[--size] = null;
@@ -67,7 +68,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // return a random item (but do not remove it)
     public Item sample() {
         if (isEmpty()) throw new java.util.NoSuchElementException("Queue is Empty");
-        int r = StdRandom.uniform(size);
+        int r = StdRandom.uniformInt(size);
         return q[r];
     }
 
